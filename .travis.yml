@@ -1,0 +1,20 @@
+language: c
+
+dist: trusty
+sudo: required
+
+addons:
+  apt:
+    packages:
+      - lzip
+
+install:
+  - wget -P $TRAVIS_BUILD_DIR https://ftp.gnu.org/gnu/guile/guile-2.2.0-pack-x86_64-linux-gnu.tar.lz
+  - wget -P $TRAVIS_BUILD_DIR https://ftp.gnu.org/gnu/guile/guile-2.2.0-pack-x86_64-linux-gnu.tar.lz.sig
+  - gpg --keyserver keys.gnupg.net --recv-keys FF478FB264DE32EC296725A3DDC0F5358812F8F2
+  - gpg --verify $TRAVIS_BUILD_DIR/guile-2.2.0-pack-x86_64-linux-gnu.tar.lz.sig
+  - ( cd / ; sudo tar xvf $TRAVIS_BUILD_DIR/guile-2.2.0-pack-x86_64-linux-gnu.tar.lz )
+  - export PATH=/opt/guile-2.2.0/bin:$PATH
+
+script:
+  - make test
