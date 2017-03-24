@@ -43,4 +43,9 @@
 (test-eqv 5 (a-plus-abs-b 3 -2))
 (test-end "Exercise 1.4")
 
+(test-begin "Exercise 1.5")
+;; When evaluating `(test 0 (p))` using applicative-order evaluation, `(p)`
+;; expands infinitely to itself.
+(test-end "Exercise 1.5")
+
 (test-end "Chapter 1")
