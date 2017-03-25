@@ -48,4 +48,12 @@
 ;; expands infinitely to itself.
 (test-end "Exercise 1.5")
 
+(test-begin "Exercise 1.6")
+;; In our model, `if` needs to be a special form so that the alternative clause
+;; is only expanded if the predicate is false.
+(define (new-if predicate then-clause else-clause)
+  (cond (predicate then-clause)
+        (else else-clause)))
+(test-end "Exercise 1.6")
+
 (test-end "Chapter 1")
