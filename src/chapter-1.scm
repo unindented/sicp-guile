@@ -56,4 +56,58 @@
         (else else-clause)))
 (test-end "Exercise 1.6")
 
+(test-begin "Exercise 1.7 a")
+(define (sqrt x)
+  (define (sqrt-iter guess x)
+    (if (good-enough? guess x)
+      guess
+      (sqrt-iter (improve guess x) x)))
+
+  (define (good-enough? guess x)
+    (< (abs (- (square guess) x)) 0.001))
+
+  (define (improve guess x)
+    (average guess (/ x guess)))
+
+  (define (square x)
+    (* x x))
+
+  (define (average x y)
+    (/ (+ x y) 2))
+
+  (sqrt-iter 1.0 x))
+
+(test-approximate 2 (sqrt 4) 0.0001)
+(test-approximate 1.4142 (sqrt 2) 0.0001)
+(test-expect-fail "insufficient precision")
+(test-approximate "insufficient precision" 0.01 (sqrt 0.0001) 0.001)
+(test-end "Exercise 1.7 a")
+
+(test-begin "Exercise 1.7 b")
+(define (sqrt-alt x)
+  (define (sqrt-iter prev-guess curr-guess x)
+    (if (good-enough? prev-guess curr-guess)
+      curr-guess
+      (sqrt-iter curr-guess (improve curr-guess x) x)))
+
+  (define (good-enough? prev-guess curr-guess)
+    (<= (abs (- curr-guess prev-guess))
+        (* curr-guess 0.001)))
+
+  (define (improve guess x)
+    (average guess (/ x guess)))
+
+  (define (square x)
+    (* x x))
+
+  (define (average x y)
+    (/ (+ x y) 2))
+
+  (sqrt-iter 0.0 1.0 x))
+
+(test-approximate 2 (sqrt-alt 4) 0.0001)
+(test-approximate 1.4142 (sqrt-alt 2) 0.0001)
+(test-approximate 0.01 (sqrt-alt 0.0001) 0.0001)
+(test-end "Exercise 1.7 b")
+
 (test-end "Chapter 1")
