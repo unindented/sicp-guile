@@ -110,4 +110,31 @@
 (test-approximate 0.01 (sqrt-alt 0.0001) 0.0001)
 (test-end "Exercise 1.7 b")
 
+(test-begin "Exercise 1.8")
+(define (cube-root x)
+  (define (cube-root-iter prev-guess curr-guess x)
+    (if (good-enough? prev-guess curr-guess)
+      curr-guess
+      (cube-root-iter curr-guess (improve curr-guess x) x)))
+
+  (define (good-enough? prev-guess curr-guess)
+    (<= (abs (- curr-guess prev-guess))
+        (* curr-guess 0.001)))
+
+  (define (improve guess x)
+    (average (/ x (square guess)) guess guess))
+
+  (define (average x y z)
+    (/ (+ x y z) 3))
+
+  (define (square x)
+    (* x x))
+
+  (cube-root-iter 0.0 1.0 x))
+
+(test-approximate 3 (cube-root 27) 0.0001)
+(test-approximate 1.4422 (cube-root 3) 0.0001)
+(test-approximate 0.1 (cube-root 0.001) 0.0001)
+(test-end "Exercise 1.8")
+
 (test-end "Chapter 1")
