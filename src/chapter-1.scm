@@ -137,4 +137,15 @@
 (test-approximate 0.1 (cube-root 0.001) 0.0001)
 (test-end "Exercise 1.8")
 
+(test-begin "Exercise 1.9")
+(define (sum-rec a b)
+  (if (= a 0) b (1+ (sum-rec (1- a) b))))
+
+(define (sum-iter a b)
+  (if (= a 0) b (sum-iter (1- a) (1+ b))))
+
+(test-eqv 9 (sum-rec 4 5))
+(test-eqv 9 (sum-iter 4 5))
+(test-end "Exercise 1.9")
+
 (test-end "Chapter 1")
