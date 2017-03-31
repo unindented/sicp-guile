@@ -148,4 +148,16 @@
 (test-eqv 9 (sum-iter 4 5))
 (test-end "Exercise 1.9")
 
+(test-begin "Exercise 1.10")
+(define (ackermann x y)
+  (cond ((= y 0) 0)
+        ((= x 0) (* 2 y))
+        ((= y 1) 2)
+        (else (ackermann (- x 1) (ackermann x (- y 1))))))
+
+(test-eqv 16 (ackermann 0 8)) ;; 2*n
+(test-eqv 1024 (ackermann 1 10)) ;; 2^n
+(test-eqv 65536 (ackermann 2 4)) ;; 2^(a(n-1))
+(test-end "Exercise 1.10")
+
 (test-end "Chapter 1")
