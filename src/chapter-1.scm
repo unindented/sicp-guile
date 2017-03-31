@@ -160,4 +160,30 @@
 (test-eqv 65536 (ackermann 2 4)) ;; 2^(a(n-1))
 (test-end "Exercise 1.10")
 
+(test-begin "Exercise 1.11")
+(define (f-rec n)
+  (if (< n 3)
+    n
+    (+ (f-rec (- n 1))
+       (* 2 (f-rec (- n 2)))
+       (* 3 (f-rec (- n 3))))))
+
+(define (f-iter n)
+  (define (iter i a b c)
+    (cond ((< i 0) i)
+          ((= i 0) a)
+          (else (iter (- i 1) b c (+ c (* 2 b) (* 3 a))))))
+
+  (iter n 0 1 2))
+
+(test-eqv 1 (f-rec 1))
+(test-eqv 2 (f-rec 2))
+(test-eqv 4 (f-rec 3))
+(test-eqv 11 (f-rec 4))
+(test-eqv 1 (f-iter 1))
+(test-eqv 2 (f-iter 2))
+(test-eqv 4 (f-iter 3))
+(test-eqv 11 (f-iter 4))
+(test-end "Exercise 1.11")
+
 (test-end "Chapter 1")
