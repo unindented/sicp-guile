@@ -186,4 +186,18 @@
 (test-eqv 11 (f-iter 4))
 (test-end "Exercise 1.11")
 
+(test-begin "Exercise 1.12")
+(define (pascal-triangle row col)
+  (cond ((> col row) 0)
+        ((< col 0) 0)
+        ((= col 1) 1)
+        (else (+ (pascal-triangle (- row 1) (- col 1))
+                 (pascal-triangle (- row 1) col)))))
+
+(test-eqv 1 (pascal-triangle 1 1))
+(test-eqv 1 (pascal-triangle 2 2))
+(test-eqv 2 (pascal-triangle 3 2))
+(test-eqv 3 (pascal-triangle 4 2))
+(test-end "Exercise 1.12")
+
 (test-end "Chapter 1")
