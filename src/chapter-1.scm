@@ -200,4 +200,28 @@
 (test-eqv 3 (pascal-triangle 4 2))
 (test-end "Exercise 1.12")
 
+(test-begin "Exercise 1.14")
+(define (count-change-rec amount)
+  (define (cc amount kinds-of-coins)
+    (cond ((= amount 0)
+           1)
+          ((or (< amount 0)
+               (= kinds-of-coins 0))
+           0)
+          (else
+            (+ (cc amount (- kinds-of-coins 1))
+               (cc (- amount (first-denomination kinds-of-coins)) kinds-of-coins)))))
+
+  (define (first-denomination kinds-of-coins)
+    (cond ((= kinds-of-coins 1) 1)
+          ((= kinds-of-coins 2) 5)
+          ((= kinds-of-coins 3) 10)
+          ((= kinds-of-coins 4) 25)
+          ((= kinds-of-coins 5) 50)))
+
+  (cc amount 5))
+
+(test-eqv 4 (count-change-rec 11))
+(test-end "Exercise 1.14")
+
 (test-end "Chapter 1")
