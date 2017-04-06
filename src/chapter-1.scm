@@ -224,4 +224,17 @@
 (test-eqv 4 (count-change-rec 11))
 (test-end "Exercise 1.14")
 
+(test-begin "Exercise 1.15")
+(define (sine angle)
+  (define (cube x) (* x x x))
+
+  (define (p x) (- (* 3 x) (* 4 (cube x))))
+
+  (if (not (> (abs angle) 0.1))
+    angle
+    (p (sine (/ angle 3.0)))))
+
+(test-approximate 0.85 (sine 45) 0.1)
+(test-end "Exercise 1.15")
+
 (test-end "Chapter 1")
